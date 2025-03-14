@@ -14,9 +14,9 @@ const assessPromise = delay => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (fulfilledBtn.checked) {
-        resolve(`✅ Fulfilled promise in ${delay} ms`);
+        resolve(delay);
       } else if (rejectedBtn.checked) {
-        reject(`❌ Rejected promise in ${delay} ms`);
+        reject(delay);
       }
     }, delay);
   });
@@ -29,14 +29,14 @@ document.querySelector('.form').addEventListener('submit', event => {
     .then(result => {
       iziToast.success({
         title: '',
-        message: result,
+        message: `✅ Fulfilled promise in ${result} ms`,
         position: 'topRight',
       });
     })
     .catch(error => {
       iziToast.error({
         title: '',
-        message: error,
+        message: `❌ Rejected promise in ${error} ms`,
         position: 'topRight',
       });
     });

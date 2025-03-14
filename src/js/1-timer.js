@@ -40,13 +40,15 @@ function timerUpdate() {
   const currentTime = new Date();
   const remainingTime = userSelectedDate - currentTime;
 
-  if (remainingTime <= 0) {
+  if (remainingTime <= 0 && remainingTime > -1000) {
     clearInterval(timeInterval);
     datetimePicker.disabled = false;
     startButton.disabled = true;
   }
 
-  const { days, hours, minutes, seconds } = convertMs(remainingTime);
+  const { days, hours, minutes, seconds } = convertMs(
+    Math.max(remainingTime, 0)
+  );
   daysDisplay.textContent = addLeadingZero(days);
   hoursDisplay.textContent = addLeadingZero(hours);
   minutesDisplay.textContent = addLeadingZero(minutes);
